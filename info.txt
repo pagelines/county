@@ -1,0 +1,23 @@
+== Description ==
+<h3>What is County</h3><
+
+County is your countdown section for PageLines. 
+
+County can countdown to any date and any time into the future. 
+
+Do you need a beautiful landing page while you are developing your site and want to let your customers know when you are up and running? Well County can do that for you. 
+
+You can even tell your friends on your personal blog that your birthday is coming up. 
+
+Oh... did I tell County is cloneable? You can have as many countdowns as you want anywhere on your PageLines site. 
+
+What are you waiting for? <strong>Click the buy button! :)</strong>
+
+<h3>Support</h3>
+
+County is very simple to use and you should not need any. However if you need support then write in the <strong>comment system below only</strong>. Please do not leave a review as a support question, they are for reviews. I am not notified of these reviews, and I have no way to respond to you. Please <strong>do not email me for support</strong>, because you will not receive a reply. If you need assistance, please leave a comment below, as that is what the comment system was built for. <strong>Thanks.</strong>
+
+== Changelog ==
+
+= 1.0 =
+* Initial Release
