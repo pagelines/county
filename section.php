@@ -18,6 +18,8 @@
  * @author Aleksander Hansson
  */
 
+/* Commented out because PL is not providing a per page LESS option
+
 add_filter( 'pless_vars', 'pl_counter_less');
 
 function pl_counter_less( $constants ){
@@ -38,6 +40,7 @@ function pl_counter_less( $constants ){
 	$lessvars = array_merge($newvars, $constants);
 	return $lessvars;
 }
+*/
 
 class PageLinesCounty extends PageLinesSection {
 	
@@ -108,6 +111,7 @@ class PageLinesCounty extends PageLinesSection {
 
 		$options = array(
 
+/* Commented out because PL is not providing a per page LESS option
 			//Color options
 			'countdown-colors'   => array(
 				'default'    => '',
@@ -134,6 +138,7 @@ class PageLinesCounty extends PageLinesSection {
 					)
 				)
 			),
+*/
 
 			'countdown-description'   => array(
 				'default'    => '',
@@ -456,7 +461,6 @@ class PageLinesCounty extends PageLinesSection {
 		);
 
 		register_metatab($tab_settings, $options, $this->class_name);
-
 
 	}
 
