@@ -92,9 +92,9 @@ class PageLinesCounty extends PageLinesSection {
 	?>
 	<div class="pl-countdown-container">
 		
-		<div class="pl-countdown-header center"><?php echo ploption('countdown-description-header', $this->oset) ? ploption('countdown-description-header', $this->oset) : 'Time until New Year!!!'; ?></div>
+		<div class="pl-countdown-header center"><?php echo ploption('countdown-description-header', $this->oset) ? ploption('countdown-description-header', $this->oset) : 'Time til launch . . .'; ?></div>
 		
-		<div class="pl-countdown-subhead center"><?php echo ploption('countdown-description-subhead', $this->oset) ? ploption('countdown-description-subhead', $this->oset) : 'Get ready with the champagne...'; ?></div>
+		<div class="pl-countdown-subhead center"><?php echo ploption('countdown-description-subhead', $this->oset) ? ploption('countdown-description-subhead', $this->oset) : 'We are launching our site in . . .'; ?></div>
 	
 		<?php echo sprintf ('<div id="defaultCountdown%s"></div>', $prefix); ?>
 		
