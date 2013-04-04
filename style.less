@@ -27,6 +27,11 @@
 
 /* Section LESS */
 
+.pl-countdown-container {
+	padding: 2.5%;
+	.box-sizing(border-box);
+}
+
 .pl-countdown-numbers {
 	font-size:120px; 
 	line-height:100px; 
@@ -44,6 +49,7 @@
 	.opacity(0.7);
 	letter-spacing:1px;
 	text-shadow: none;
+	margin-bottom: 36px;
 
 }
 
@@ -52,7 +58,7 @@
 	font-size: 81px;
 	letter-spacing: -1px;
 	line-height: 1;
-	margin-bottom: 18px;
+	margin-bottom: 36px;
 	color: @countdowntextcolor;
 	text-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 0 30px rgba(0,0,0,0.075);
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -63,7 +69,7 @@
 	font-size:30px;
 	color: @countdowntextcolor;
 	margin: 0;
-	margin-bottom: 18px;
+	margin-bottom: 36px;
 	margin-left: 5%;
 	margin-right: 5%;
 	line-height: 36px;
@@ -77,7 +83,7 @@
 	font-size:30px;
 	color: @countdowntextcolor;
 	margin: 0;
-	margin-bottom: 18px;
+	margin-bottom: 0;
 	margin-left: 5%;
 	margin-right: 5%;
 	line-height: 36px;
@@ -89,4 +95,35 @@
 
 #county-section {
 	.horizontal-gradient (@countdownbackgroundcolor, lighten(@countdownbackgroundcolor, 25%));
+}
+
+#sidebar-wrap {
+	.pl-countdown-container {
+		padding: 5%;
+	}
+	#county-section {
+		#gradient > .vertical (lighten(@countdownbackgroundcolor, 25%),@countdownbackgroundcolor);
+	}
+	.pl-countdown-numbers {
+		font-size: 40px;
+		line-height: 40px;
+		letter-spacing: 1px;
+	}	
+	.pl-countdown-labels {
+		font-size: 12px;
+		margin-bottom: 18px;
+	}
+	.pl-countdown-header {
+		font-size: 30px;
+		letter-spacing: 1px;
+		margin-bottom: 18px;
+	}
+	.pl-countdown-subhead {
+		font-size: 15px;
+		margin-bottom: 18px;
+	}
+	.pl-countdown-below {
+		font-size: 15px;
+		line-height: 20px;
+	}
 }

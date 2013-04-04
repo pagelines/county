@@ -19,5 +19,10 @@ Please do not leave a review as a support question, they are for reviews. I am n
 
 == Changelog ==
 
+= 1.1 =
+* Added shortcode field
+* Styled County in the sidebar area - Thanks to Mike Zielonka!
+* Fixed translation domain - can now be translated!
+
 = 1.0 =
 * Initial Release
