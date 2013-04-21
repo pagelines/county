@@ -19,6 +19,12 @@ Please do not leave a review as a support question, they are for reviews. I am n
 
 == Changelog ==
 
+= 1.2 =
+* General bug fixing
+* Removed default discription for shortcode input.
+* Nesten LESS code
+* Changed class name - Had "PageLines" in it. Which is for PageLines products only.
+
 = 1.1 =
 * Added shortcode field
 * Styled County in the sidebar area - Thanks to Mike Zielonka!
