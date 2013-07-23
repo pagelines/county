@@ -4,11 +4,13 @@
 	Author: Aleksander Hansson
 	Author URI: http://ahansson.com
 	Demo: http://county.ahansson.com
-	Version: 1.2
+	Version: 1.3
 	Description: County is a countdown section that can count down to any date into the future. Use as Coming Soon Page or as countdown for your birtday - or whatever you need a countdown for!
 	Class Name: County
 	Workswith: templates, main, sidebar1, sidebar2, sidebar_wrap, header, footer, morefoot
 	Cloning:true
+	V3: true
+	Filter: full-width
 */
 
 class County extends PageLinesSection {
@@ -20,9 +22,9 @@ class County extends PageLinesSection {
 
 		function pl_beefy_less( $constants ){
 
-			$countdown_background_color = (ploption('countdown-background-color')) ? ploption('countdown-background-color') : '#1568AD';
-			$countdown_label_color = (ploption('countdown-label-color')) ? ploption('countdown-label-color') : '#000000';
-			$countdown_text_color = (ploption('countdown-text-color')) ? ploption('countdown-text-color') : '#ffffff';
+			$countdown_background_color = ($this->opt('countdown-background-color')) ? $this->opt('countdown-background-color') : '#1568AD';
+			$countdown_label_color = ($this->opt('countdown-label-color')) ? $this->opt('countdown-label-color') : '#000000';
+			$countdown_text_color = ($this->opt('countdown-text-color')) ? $this->opt('countdown-text-color') : '#ffffff';
 
 
 			$newvars = array(
@@ -44,10 +46,10 @@ class County extends PageLinesSection {
 
 		// $this->base_url
 
-		$countdown_terms_days = ploption( 'countdown-terms-days' ) ? ploption( 'countdown-terms-days' ) : 'Days';
-		$countdown_terms_hours = ploption( 'countdown-terms-hours' ) ? ploption( 'countdown-terms-hours' ) : 'Hours';
-		$countdown_terms_minutes = ploption( 'countdown-terms-minutes' ) ? ploption( 'countdown-terms-minutes' ) : 'Minutes';
-		$countdown_terms_seconds = ploption( 'countdown-terms-seconds' ) ? ploption( 'countdown-terms-seconds' ) : 'Seconds';
+		$countdown_terms_days = $this->opt( 'countdown-terms-days' ) ? $this->opt( 'countdown-terms-days' ) : 'Days';
+		$countdown_terms_hours = $this->opt( 'countdown-terms-hours' ) ? $this->opt( 'countdown-terms-hours' ) : 'Hours';
+		$countdown_terms_minutes = $this->opt( 'countdown-terms-minutes' ) ? $this->opt( 'countdown-terms-minutes' ) : 'Minutes';
+		$countdown_terms_seconds = $this->opt( 'countdown-terms-seconds' ) ? $this->opt( 'countdown-terms-seconds' ) : 'Seconds';
 
 		wp_enqueue_script('jquery');
 
@@ -66,7 +68,7 @@ class County extends PageLinesSection {
 
 	function section_head() {
 
-		$clone_id = $this->oset['clone_id'];
+		$clone_id = $this->get_the_id();
 
 		$prefix = ($clone_id != '') ? 'Clone'.$clone_id : '';
 
@@ -74,7 +76,7 @@ class County extends PageLinesSection {
 			<script type="text/javascript">
 				jQuery(document).ready(function(){
 					var count<?php $prefix ?> = new Date();
-					count<?php $prefix ?> = new Date(<?php echo ploption('countdown-timestamp-year', $this->tset) ? ploption('countdown-timestamp-year', $this->tset) : 'count.getFullYear() + 1'; ?>, <?php echo ploption('countdown-timestamp-month', $this->tset) ? ploption('countdown-timestamp-month', $this->tset) : '0'; ?>, <?php echo ploption('countdown-timestamp-date', $this->tset) ? ploption('countdown-timestamp-date', $this->tset) : '1'; ?>, <?php echo ploption('countdown-timestamp-hour', $this->tset) ? ploption('countdown-timestamp-hour', $this->tset) : '0'; ?>, <?php echo ploption('countdown-timestamp-minute', $this->tset) ? ploption('countdown-timestamp-minute', $this->tset) : '0'; ?>, <?php echo ploption('countdown-timestamp-seconds', $this->tset) ? ploption('countdown-timestamp-seconds', $this->tset) : '0'; ?>);
+					count<?php $prefix ?> = new Date(<?php echo $this->opt('countdown-timestamp-year', $this->tset) ? $this->opt('countdown-timestamp-year', $this->tset) : 'count.getFullYear() + 1'; ?>, <?php echo $this->opt('countdown-timestamp-month', $this->tset) ? $this->opt('countdown-timestamp-month', $this->tset) : '0'; ?>, <?php echo $this->opt('countdown-timestamp-date', $this->tset) ? $this->opt('countdown-timestamp-date', $this->tset) : '1'; ?>, <?php echo $this->opt('countdown-timestamp-hour', $this->tset) ? $this->opt('countdown-timestamp-hour', $this->tset) : '0'; ?>, <?php echo $this->opt('countdown-timestamp-minute', $this->tset) ? $this->opt('countdown-timestamp-minute', $this->tset) : '0'; ?>, <?php echo $this->opt('countdown-timestamp-seconds', $this->tset) ? $this->opt('countdown-timestamp-seconds', $this->tset) : '0'; ?>);
 					jQuery('#defaultCountdown<?php echo $prefix;?>').countdown({until: count<?php $prefix ?>, format: 'DHMS', layout: '<div class="row center"><div class="span6 zmb"><div class="row">{d<}<div class="span6 pl-countdown-days pl-countdown-numbers zmb">{dn}<div class="row pl-countdown-labels">{dl}</div></div>{d>}{h<}<div class="span6 pl-countdown-hours pl-countdown-numbers zmb">{hn}<div class="row pl-countdown-labels">{hl}</div></div>{h>}</div></div><div class="span6 zmb"><div class="row">{m<}<div class="span6 pl-countdown-minutes pl-countdown-numbers zmb">{mn}<div class="row pl-countdown-labels">{ml}</div></div>{m>}{s<}<div class="span6 pl-countdown-seconds pl-countdown-numbers zmb">{sn}<div class="row pl-countdown-labels">{sl}</div></div>{s>}</div></div></div>'});
 					jQuery('#year').text(count<?php $prefix ?>.getFullYear());
 				});
@@ -85,28 +87,28 @@ class County extends PageLinesSection {
 
 	function section_template() {
 
-		$clone_id = $this->oset['clone_id'];
+		$clone_id = $this->get_the_id();
 
 		$prefix = ($clone_id != '') ? 'Clone'.$clone_id : '';
 
-		$field1 = ploption('countdown-description-header', $this->tset) ? ploption('countdown-description-header', $this->tset) : 'Time to launch . . .';
-		$field2 = ploption('countdown-description-subhead', $this->tset) ? ploption('countdown-description-subhead', $this->tset) : 'We are launching our site in . . .';
-		$field3 = ploption('countdown-description-below', $this->tset) ? ploption('countdown-description-below', $this->tset) : 'This is default for County! Go to PageLines Page Options for your settings.';
-		$field4 = ploption('countdown-description-shortcode', $this->tset) ? ploption('countdown-description-shortcode', $this->tset) : '';
+		$field1 = $this->opt('countdown-description-header', $this->tset) ? $this->opt('countdown-description-header', $this->tset) : 'Time to launch . . .';
+		$field2 = $this->opt('countdown-description-subhead', $this->tset) ? $this->opt('countdown-description-subhead', $this->tset) : 'We are launching our site in . . .';
+		$field3 = $this->opt('countdown-description-below', $this->tset) ? $this->opt('countdown-description-below', $this->tset) : 'This is default for County! Go to PageLines Page Options for your settings.';
+		$field4 = $this->opt('countdown-description-shortcode', $this->tset) ? $this->opt('countdown-description-shortcode', $this->tset) : '';
 
 
 		?>
 			<div class="pl-countdown-container">
 
-				<div class="pl-countdown-header center"><?php echo do_shortcode( $field1 ); ?></div>
+				<div class="pl-countdown-header center" data-sync="countdown-description-header"><?php echo do_shortcode( $field1 ); ?></div>
 
-				<div class="pl-countdown-subhead center"><?php echo do_shortcode( $field2 );  ?></div>
+				<div class="pl-countdown-subhead center" data-sync="countdown-description-subhead"><?php echo do_shortcode( $field2 );  ?></div>
 
 				<?php echo sprintf ('<div id="defaultCountdown%s"></div>', $prefix); ?>
 
-				<div class="pl-countdown-below center"><?php echo do_shortcode( $field3 ); ?></div>
+				<div class="pl-countdown-below center" data-sync="countdown-description-below"><?php echo do_shortcode( $field3 ); ?></div>
 
-				<div class="pl-countdown-shortcode center"><?php echo do_shortcode( $field4 ); ?></div>
+				<div class="pl-countdown-shortcode center" data-sync="countdown-description-shortcode"><?php echo do_shortcode( $field4 ); ?></div>
 
 
 			</div>
@@ -150,37 +152,29 @@ class County extends PageLinesSection {
 */
 
 			'countdown-description'   => array(
-				'default'    => '',
 				'type'     => 'multi_option',
-				'title'     =>  __('Your text options', 'County'),
-				'shortexp'   =>  __('Type in your text for the countdown.', 'County'),
+				'title'     =>  __('Text options', 'County'),
 				'selectvalues'   => array(
 					'countdown-description-header' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Custom countdown header text', 'County'),
-						'inputlabel'  =>  __('Your custom countdown header text', 'County'),
+						'inputlabel'  =>  __('Custom countdown header text', 'County'),
 						'shortexp'   =>  __('For example: "The offer is ending in:" or "Site is launching in:"', 'County'),
 					),
 					'countdown-description-subhead' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Custom subheading text above the counter', 'County'),
-						'inputlabel'  =>  __('Your custom text above the counter', 'County'),
+						'inputlabel'  =>  __('Custom subheading text above the counter', 'County'),
 						'shortexp'   =>  __('For example: "Hurry up and go to the store!" or "We are building something amazing"', 'County'),
 					),
 					'countdown-description-below' =>  array(
 						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Custom subheading text below the counter', 'County'),
-						'inputlabel'  =>  __('Your custom text below the counter', 'County'),
+						'inputlabel'  =>  __('Custom subheading text below the counter', 'County'),
 						'shortexp'   =>  __('For example: "Click here to go to the store:" or "If you want to get in touch, please call us at +1 1234 123 123"', 'County'),
 					),
 					'countdown-description-shortcode' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Shortcode input', 'County'),
-						'inputlabel'  =>  __('Add a shortcode for yout timer', 'County'),
+						'title'   =>  __('', 'County'),
+						'inputlabel'  =>  __('Shortcode input', 'County'),
 						'shortexp'   =>  __('For example: "An email capture form."', 'County'),
 					)
 				)
@@ -188,46 +182,37 @@ class County extends PageLinesSection {
 			'countdown-terms'   => array(
 				'default'    => '',
 				'type'     => 'multi_option',
-				'title'     =>  __('Your terms for time', 'County'),
-				'shortexp'   =>  __('You can type in your own custom terms of time.', 'County'),
+				'title'     =>  __('Terms of time', 'County'),
 				'selectvalues'   => array(
 					'countdown-terms-days' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Your terms of "days"', 'County'),
-						'inputlabel'  =>  __('Your custom "days"', 'County'),
+						'inputlabel'  =>  __('Terms of "days"', 'County'),
 						'shortexp'   =>  __('For example: In your language.', 'County'),
 					),
 					'countdown-terms-hours' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Your terms of "hours"', 'County'),
-						'inputlabel'  =>  __('Your custom "hours"', 'County'),
+						'inputlabel'  =>  __('Terms of "hours"', 'County'),
 						'shortexp'   =>  __('For example: In your language.', 'County'),
 					),
 					'countdown-terms-minutes' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Your terms of "minutes"', 'County'),
-						'inputlabel'  =>  __('Your custom "minutes"', 'County'),
+						'inputlabel'  =>  __('Terms of "minutes"', 'County'),
 						'shortexp'   =>  __('For example: In your language.', 'County'),
 					),
 					'countdown-terms-seconds' =>  array(
-						'default'   =>  '',
 						'type'    =>  'text',
-						'title'   =>  __('Your terms of "seconds"', 'County'),
-						'inputlabel'  =>  __('Your custom "seconds"', 'County'),
+						'inputlabel'  =>  __('Terms of "seconds"', 'County'),
 						'shortexp'   =>  __('For example: In your language.', 'County'),
-					))),
+					)
+				)
+			),
 			'countdown-timestamp'   => array(
-				'default'    => '',
 				'type'     => 'multi_option',
-				'title'     =>  __('Select the date you are counting down for.', 'County'),
-				'shortexp'   =>  __('Please make a selection in all selectors.', 'County'),
+				'title'     =>  __('Countdown', 'County'),
 				'selectvalues'   => array(
 					'countdown-timestamp-date' =>  array(
-						'default'   =>  '',
 						'type'    =>  'select',
+						'inputlabel'   =>  __('Select date', 'County'),
 						'selectvalues'     => array(
 							'1' => array( 'name' => __( '1st'   , 'County' )),
 							'2' => array( 'name' => __( '2nd'   , 'County' )),
@@ -261,11 +246,10 @@ class County extends PageLinesSection {
 							'30' => array( 'name' => __( '30th'    , 'County' )),
 							'31' => array( 'name' => __( '31st'    , 'County' ))
 						),
-						'title'   =>  __('Select date', 'County'),
 					),
 					'countdown-timestamp-month' =>  array(
-						'default'   =>  '',
 						'type'    =>  'select',
+						'inputlabel'   =>  __('Select month', 'County'),
 						'selectvalues'     => array(
 							'0' => array( 'name' => __( 'January'   , 'County' )),
 							'1' => array( 'name' => __( 'February'   , 'County' )),
@@ -280,11 +264,10 @@ class County extends PageLinesSection {
 							'10' => array( 'name' => __( 'November'    , 'County' )),
 							'11' => array( 'name' => __( 'December'    , 'County' ))
 						),
-						'title'   =>  __('Select month', 'County'),
 					),
 					'countdown-timestamp-year' =>  array(
-						'default'   =>  '',
 						'type'    =>  'select',
+						'inputlabel'   =>  __('Select year', 'County'),
 						'selectvalues'     => array(
 							'2013' => array( 'name' => __( '2013'   , 'County' )),
 							'2014' => array( 'name' => __( '2014'   , 'County' )),
@@ -298,11 +281,10 @@ class County extends PageLinesSection {
 							'2022' => array( 'name' => __( '2022'    , 'County' )),
 							'2023' => array( 'name' => __( '2023'    , 'County' ))
 						),
-						'title'   =>  __('Select year', 'County'),
 					),
 					'countdown-timestamp-hour' =>  array(
-						'default'   =>  '',
 						'type'    =>  'select',
+						'inputlabel'   =>  __('Select hour', 'County'),
 						'selectvalues'     => array(
 							'0' => array( 'name' => __( '0'   , 'County' )),
 							'1' => array( 'name' => __( '1'   , 'County' )),
@@ -329,11 +311,10 @@ class County extends PageLinesSection {
 							'22' => array( 'name' => __( '22'  , 'County' )),
 							'23' => array( 'name' => __( '23'    , 'County' ))
 						),
-						'title'   =>  __('Select hour', 'County'),
 					),
 					'countdown-timestamp-minute' =>  array(
-						'default'   =>  '',
 						'type'    =>  'select',
+						'inputlabel'   =>  __('Select minute', 'County'),
 						'selectvalues'     => array(
 							'0' => array( 'name' => __( '0'   , 'County' )),
 							'1' => array( 'name' => __( '1'   , 'County' )),
@@ -396,11 +377,10 @@ class County extends PageLinesSection {
 							'58' => array( 'name' => __( '58'  , 'County' )),
 							'59' => array( 'name' => __( '59' , 'County' ))
 						),
-						'title'   =>  __('Select minute', 'County'),
 					),
 					'countdown-timestamp-second' =>  array(
-						'default'   =>  '',
 						'type'    =>  'select',
+						'inputlabel'   =>  __('Select seconds', 'County'),
 						'selectvalues'     => array(
 							'0' => array( 'name' => __( '0'   , 'County' )),
 							'1' => array( 'name' => __( '1'   , 'County' )),
@@ -463,7 +443,6 @@ class County extends PageLinesSection {
 							'58' => array( 'name' => __( '58'  , 'County' )),
 							'59' => array( 'name' => __( '59' , 'County' ))
 						),
-						'title'   =>  __('Select seconds', 'County'),
 					)
 				)
 			),
