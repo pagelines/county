@@ -1,3 +1,9 @@
 /.DS_Store
 /splash.psd
 /thumb.psd
+
+.DS_Store
+/sections/.DS_Store
+/sections/county/.DS_Store
+/sections/county/thumb.psd
+/sections/county/splash.psd

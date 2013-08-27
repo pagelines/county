@@ -4,8 +4,6 @@
 	Author: Aleksander Hansson
 	Author URI: http://ahansson.com
 	Demo: http://county.ahansson.com
-	Version: 1.3
-	Description: County is a countdown section that can count down to any date into the future. Use as Coming Soon Page or as countdown for your birtday - or whatever you need a countdown for!
 	Class Name: County
 	Workswith: templates, main, sidebar1, sidebar2, sidebar_wrap, header, footer, morefoot
 	Cloning:true
