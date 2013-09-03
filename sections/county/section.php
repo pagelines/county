@@ -5,7 +5,6 @@
 	Author URI: http://ahansson.com
 	Demo: http://county.ahansson.com
 	Class Name: County
-	Workswith: templates, main, sidebar1, sidebar2, sidebar_wrap, header, footer, morefoot
 	Cloning:true
 	V3: true
 	Filter: full-width
