@@ -12,33 +12,6 @@
 
 class County extends PageLinesSection {
 
-	function section_persistent(){
-
-	/*
-		add_filter( 'pless_vars', array(&$this, 'pl_counter_less') );
-
-		function pl_beefy_less( $constants ){
-
-			$countdown_background_color = ($this->opt('countdown-background-color')) ? $this->opt('countdown-background-color') : '#1568AD';
-			$countdown_label_color = ($this->opt('countdown-label-color')) ? $this->opt('countdown-label-color') : '#000000';
-			$countdown_text_color = ($this->opt('countdown-text-color')) ? $this->opt('countdown-text-color') : '#ffffff';
-
-
-			$newvars = array(
-
-				'countdownbackgroundcolor' => $countdown_background_color ,
-				'countdownlabelcolor' => $countdown_label_color ,
-				'countdowntextcolor' => $countdown_text_color
-
-			);
-
-			$lessvars = array_merge($newvars, $constants);
-			return $lessvars;
-		}
-
-	*/
-	}
-
 	function section_styles(){
 
 		// $this->base_url
@@ -73,7 +46,7 @@ class County extends PageLinesSection {
 			<script type="text/javascript">
 				jQuery(document).ready(function(){
 					var count<?php $prefix ?> = new Date();
-					count<?php $prefix ?> = new Date(<?php echo $this->opt('countdown-timestamp-year', $this->tset) ? $this->opt('countdown-timestamp-year', $this->tset) : 'count.getFullYear() + 1'; ?>, <?php echo $this->opt('countdown-timestamp-month', $this->tset) ? $this->opt('countdown-timestamp-month', $this->tset) : '0'; ?>, <?php echo $this->opt('countdown-timestamp-date', $this->tset) ? $this->opt('countdown-timestamp-date', $this->tset) : '1'; ?>, <?php echo $this->opt('countdown-timestamp-hour', $this->tset) ? $this->opt('countdown-timestamp-hour', $this->tset) : '0'; ?>, <?php echo $this->opt('countdown-timestamp-minute', $this->tset) ? $this->opt('countdown-timestamp-minute', $this->tset) : '0'; ?>, <?php echo $this->opt('countdown-timestamp-seconds', $this->tset) ? $this->opt('countdown-timestamp-seconds', $this->tset) : '0'; ?>);
+					count<?php $prefix ?> = new Date(<?php echo $this->opt('countdown-timestamp-year') ? $this->opt('countdown-timestamp-year') : 'count.getFullYear() + 1'; ?>, <?php echo $this->opt('countdown-timestamp-month') ? $this->opt('countdown-timestamp-month') : '0'; ?>, <?php echo $this->opt('countdown-timestamp-date') ? $this->opt('countdown-timestamp-date') : '1'; ?>, <?php echo $this->opt('countdown-timestamp-hour') ? $this->opt('countdown-timestamp-hour') : '0'; ?>, <?php echo $this->opt('countdown-timestamp-minute') ? $this->opt('countdown-timestamp-minute') : '0'; ?>, <?php echo $this->opt('countdown-timestamp-seconds') ? $this->opt('countdown-timestamp-seconds') : '0'; ?>);
 					jQuery('#defaultCountdown<?php echo $prefix;?>').countdown({until: count<?php $prefix ?>, format: 'DHMS', layout: '<div class="row center"><div class="span6 zmb"><div class="row">{d<}<div class="span6 pl-countdown-days pl-countdown-numbers zmb">{dn}<div class="row pl-countdown-labels">{dl}</div></div>{d>}{h<}<div class="span6 pl-countdown-hours pl-countdown-numbers zmb">{hn}<div class="row pl-countdown-labels">{hl}</div></div>{h>}</div></div><div class="span6 zmb"><div class="row">{m<}<div class="span6 pl-countdown-minutes pl-countdown-numbers zmb">{mn}<div class="row pl-countdown-labels">{ml}</div></div>{m>}{s<}<div class="span6 pl-countdown-seconds pl-countdown-numbers zmb">{sn}<div class="row pl-countdown-labels">{sl}</div></div>{s>}</div></div></div>'});
 					jQuery('#year').text(count<?php $prefix ?>.getFullYear());
 				});
@@ -88,10 +61,10 @@ class County extends PageLinesSection {
 
 		$prefix = ($clone_id != '') ? 'Clone'.$clone_id : '';
 
-		$field1 = $this->opt('countdown-description-header', $this->tset) ? $this->opt('countdown-description-header', $this->tset) : 'Time to launch . . .';
-		$field2 = $this->opt('countdown-description-subhead', $this->tset) ? $this->opt('countdown-description-subhead', $this->tset) : 'We are launching our site in . . .';
-		$field3 = $this->opt('countdown-description-below', $this->tset) ? $this->opt('countdown-description-below', $this->tset) : 'This is default for County! Go to PageLines Page Options for your settings.';
-		$field4 = $this->opt('countdown-description-shortcode', $this->tset) ? $this->opt('countdown-description-shortcode', $this->tset) : '';
+		$field1 = $this->opt('countdown-description-header') ? $this->opt('countdown-description-header') : 'Time to launch . . .';
+		$field2 = $this->opt('countdown-description-subhead') ? $this->opt('countdown-description-subhead') : 'We are launching our site in . . .';
+		$field3 = $this->opt('countdown-description-below') ? $this->opt('countdown-description-below') : 'This is default for County! Go to PageLines Page Options for your settings.';
+		$field4 = $this->opt('countdown-description-shortcode') ? $this->opt('countdown-description-shortcode') : '';
 
 
 		?>
@@ -113,349 +86,354 @@ class County extends PageLinesSection {
 
 	}
 
-	function section_optionator( $settings ){
+	function section_opts() {
 
-		$settings = wp_parse_args($settings, $this->optionator_default);
+		$options = array();
 
-		$options = array(
+		$how_to_use = __( '
+		<strong>Read the instructions below before asking for additional help:</strong>
+		</br></br>
+		<strong>1.</strong> In the frontend editor, drag the County section to a template of your choice.
+		</br></br>
+		<strong>2.</strong> Edit text, terms of time and set your time stamp.
+		</br></br>
+		<strong>3.</strong> When you are done, hit "Publish" and refresh to see changes.
+		</br></br>
+		<div class="row zmb">
+				<div class="span6 tac zmb">
+					<a class="btn btn-info" href="http://forum.pagelines.com/71-products-by-aleksander-hansson/" target="_blank" style="padding:4px 0 4px;width:100%"><i class="icon-ambulance"></i>          Forum</a>
+				</div>
+				<div class="span6 tac zmb">
+					<a class="btn btn-info" href="http://betterdms.com" target="_blank" style="padding:4px 0 4px;width:100%"><i class="icon-align-justify"></i>          Better DMS</a>
+				</div>
+			</div>
+			<div class="row zmb" style="margin-top:4px;">
+				<div class="span12 tac zmb">
+					<a class="btn btn-success" href="http://shop.ahansson.com" target="_blank" style="padding:4px 0 4px;width:100%"><i class="icon-shopping-cart" ></i>          My Shop</a>
+				</div>
+			</div>
+		', 'county' );
 
-/* Commented out because PL is not providing a per page LESS option
-			//Color options
-			'countdown-colors'   => array(
-				'default'    => '',
-				'type'     => 'color_multi',
-				'title'     =>  __('Select the color options', 'County'),
-				'selectvalues'   => array(
-					'countdown-text-color' =>  array(
-						'default'   =>  '',
-						'type'    =>  'colorpicker',
-						'title'   =>  __('County text color', 'County'),
-						'inputlabel'  =>  __('Choose text color for your countdown.', 'County'),
-					),
-					'countdown-label-color' =>  array(
-						'default'   =>  '',
-						'type'    =>  'colorpicker',
-						'title'   =>  __('County label color', 'County'),
-						'inputlabel'  =>  __('Choose text color for your labels that is below the numbers.', 'County'),
-					),
-					'countdown-background-color' =>  array(
-						'default'   =>  '',
-						'type'    =>  'colorpicker',
-						'title'   =>  __('County background color', 'County'),
-						'inputlabel'  =>  __('Choose base color for your countdown.', 'County'),
-					)
-				)
-			),
-*/
-
-			'countdown-description'   => array(
-				'type'     => 'multi_option',
-				'title'     =>  __('Text options', 'County'),
-				'selectvalues'   => array(
-					'countdown-description-header' =>  array(
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Custom countdown header text', 'County'),
-						'shortexp'   =>  __('For example: "The offer is ending in:" or "Site is launching in:"', 'County'),
-					),
-					'countdown-description-subhead' =>  array(
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Custom subheading text above the counter', 'County'),
-						'shortexp'   =>  __('For example: "Hurry up and go to the store!" or "We are building something amazing"', 'County'),
-					),
-					'countdown-description-below' =>  array(
-						'default'   =>  '',
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Custom subheading text below the counter', 'County'),
-						'shortexp'   =>  __('For example: "Click here to go to the store:" or "If you want to get in touch, please call us at +1 1234 123 123"', 'County'),
-					),
-					'countdown-description-shortcode' =>  array(
-						'type'    =>  'text',
-						'title'   =>  __('', 'County'),
-						'inputlabel'  =>  __('Shortcode input', 'County'),
-						'shortexp'   =>  __('For example: "An email capture form."', 'County'),
-					)
-				)
-			),
-			'countdown-terms'   => array(
-				'default'    => '',
-				'type'     => 'multi_option',
-				'title'     =>  __('Terms of time', 'County'),
-				'selectvalues'   => array(
-					'countdown-terms-days' =>  array(
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Terms of "days"', 'County'),
-						'shortexp'   =>  __('For example: In your language.', 'County'),
-					),
-					'countdown-terms-hours' =>  array(
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Terms of "hours"', 'County'),
-						'shortexp'   =>  __('For example: In your language.', 'County'),
-					),
-					'countdown-terms-minutes' =>  array(
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Terms of "minutes"', 'County'),
-						'shortexp'   =>  __('For example: In your language.', 'County'),
-					),
-					'countdown-terms-seconds' =>  array(
-						'type'    =>  'text',
-						'inputlabel'  =>  __('Terms of "seconds"', 'County'),
-						'shortexp'   =>  __('For example: In your language.', 'County'),
-					)
-				)
-			),
-			'countdown-timestamp'   => array(
-				'type'     => 'multi_option',
-				'title'     =>  __('Countdown', 'County'),
-				'selectvalues'   => array(
-					'countdown-timestamp-date' =>  array(
-						'type'    =>  'select',
-						'inputlabel'   =>  __('Select date', 'County'),
-						'selectvalues'     => array(
-							'1' => array( 'name' => __( '1st'   , 'County' )),
-							'2' => array( 'name' => __( '2nd'   , 'County' )),
-							'3' => array( 'name' => __( '3rd'    , 'County' )),
-							'4' => array( 'name' => __( '4th'    , 'County' )),
-							'5' => array( 'name' => __( '5th'    , 'County' )),
-							'6' => array( 'name' => __( '6th'    , 'County' )),
-							'7' => array( 'name' => __( '7th'    , 'County' )),
-							'8' => array( 'name' => __( '8th'  , 'County' )),
-							'9' => array( 'name' => __( '9th'    , 'County' )),
-							'10' => array( 'name' => __( '10th'    , 'County' )),
-							'11' => array( 'name' => __( '11th'    , 'County' )),
-							'12' => array( 'name' => __( '12th'    , 'County' )),
-							'13' => array( 'name' => __( '13th'     , 'County' )),
-							'14' => array( 'name' => __( '14th'   , 'County' )),
-							'15' => array( 'name' => __( '15th'    , 'County' )),
-							'16' => array( 'name' => __( '16th'    , 'County' )),
-							'17' => array( 'name' => __( '17th'    , 'County' )),
-							'18' => array( 'name' => __( '18th'    , 'County' )),
-							'19' => array( 'name' => __( '19th'    , 'County' )),
-							'20' => array( 'name' => __( '20th'  , 'County' )),
-							'21' => array( 'name' => __( '21st'  , 'County' )),
-							'22' => array( 'name' => __( '22nd'  , 'County' )),
-							'23' => array( 'name' => __( '23rd'    , 'County' )),
-							'24' => array( 'name' => __( '24th'     , 'County' )),
-							'25' => array( 'name' => __( '25th'    , 'County' )),
-							'26' => array( 'name' => __( '26th'     , 'County' )),
-							'27' => array( 'name' => __( '27th' , 'County' )),
-							'28' => array( 'name' => __( '28th'  , 'County' )),
-							'29' => array( 'name' => __( '29th' , 'County' )),
-							'30' => array( 'name' => __( '30th'    , 'County' )),
-							'31' => array( 'name' => __( '31st'    , 'County' ))
-						),
-					),
-					'countdown-timestamp-month' =>  array(
-						'type'    =>  'select',
-						'inputlabel'   =>  __('Select month', 'County'),
-						'selectvalues'     => array(
-							'0' => array( 'name' => __( 'January'   , 'County' )),
-							'1' => array( 'name' => __( 'February'   , 'County' )),
-							'2' => array( 'name' => __( 'March'   , 'County' )),
-							'3' => array( 'name' => __( 'April'    , 'County' )),
-							'4' => array( 'name' => __( 'May'    , 'County' )),
-							'5' => array( 'name' => __( 'June'    , 'County' )),
-							'6' => array( 'name' => __( 'July'    , 'County' )),
-							'7' => array( 'name' => __( 'August'    , 'County' )),
-							'8' => array( 'name' => __( 'September'  , 'County' )),
-							'9' => array( 'name' => __( 'October'    , 'County' )),
-							'10' => array( 'name' => __( 'November'    , 'County' )),
-							'11' => array( 'name' => __( 'December'    , 'County' ))
-						),
-					),
-					'countdown-timestamp-year' =>  array(
-						'type'    =>  'select',
-						'inputlabel'   =>  __('Select year', 'County'),
-						'selectvalues'     => array(
-							'2013' => array( 'name' => __( '2013'   , 'County' )),
-							'2014' => array( 'name' => __( '2014'   , 'County' )),
-							'2015' => array( 'name' => __( '2015'    , 'County' )),
-							'2016' => array( 'name' => __( '2016'    , 'County' )),
-							'2017' => array( 'name' => __( '2017'    , 'County' )),
-							'2018' => array( 'name' => __( '2018'    , 'County' )),
-							'2019' => array( 'name' => __( '2019'    , 'County' )),
-							'2020' => array( 'name' => __( '2020'  , 'County' )),
-							'2021' => array( 'name' => __( '2021'    , 'County' )),
-							'2022' => array( 'name' => __( '2022'    , 'County' )),
-							'2023' => array( 'name' => __( '2023'    , 'County' ))
-						),
-					),
-					'countdown-timestamp-hour' =>  array(
-						'type'    =>  'select',
-						'inputlabel'   =>  __('Select hour', 'County'),
-						'selectvalues'     => array(
-							'0' => array( 'name' => __( '0'   , 'County' )),
-							'1' => array( 'name' => __( '1'   , 'County' )),
-							'2' => array( 'name' => __( '2'   , 'County' )),
-							'3' => array( 'name' => __( '3'    , 'County' )),
-							'4' => array( 'name' => __( '4'    , 'County' )),
-							'5' => array( 'name' => __( '5'    , 'County' )),
-							'6' => array( 'name' => __( '6'    , 'County' )),
-							'7' => array( 'name' => __( '7'    , 'County' )),
-							'8' => array( 'name' => __( '8'  , 'County' )),
-							'9' => array( 'name' => __( '9'    , 'County' )),
-							'10' => array( 'name' => __( '10'    , 'County' )),
-							'11' => array( 'name' => __( '11'    , 'County' )),
-							'12' => array( 'name' => __( '12'    , 'County' )),
-							'13' => array( 'name' => __( '13'     , 'County' )),
-							'14' => array( 'name' => __( '14'   , 'County' )),
-							'15' => array( 'name' => __( '15'    , 'County' )),
-							'16' => array( 'name' => __( '16'    , 'County' )),
-							'17' => array( 'name' => __( '17'    , 'County' )),
-							'18' => array( 'name' => __( '18'    , 'County' )),
-							'19' => array( 'name' => __( '19'    , 'County' )),
-							'20' => array( 'name' => __( '20'  , 'County' )),
-							'21' => array( 'name' => __( '21'  , 'County' )),
-							'22' => array( 'name' => __( '22'  , 'County' )),
-							'23' => array( 'name' => __( '23'    , 'County' ))
-						),
-					),
-					'countdown-timestamp-minute' =>  array(
-						'type'    =>  'select',
-						'inputlabel'   =>  __('Select minute', 'County'),
-						'selectvalues'     => array(
-							'0' => array( 'name' => __( '0'   , 'County' )),
-							'1' => array( 'name' => __( '1'   , 'County' )),
-							'2' => array( 'name' => __( '2'   , 'County' )),
-							'3' => array( 'name' => __( '3'    , 'County' )),
-							'4' => array( 'name' => __( '4'    , 'County' )),
-							'5' => array( 'name' => __( '5'    , 'County' )),
-							'6' => array( 'name' => __( '6'    , 'County' )),
-							'7' => array( 'name' => __( '7'    , 'County' )),
-							'8' => array( 'name' => __( '8'  , 'County' )),
-							'9' => array( 'name' => __( '9'    , 'County' )),
-							'10' => array( 'name' => __( '10'    , 'County' )),
-							'11' => array( 'name' => __( '11'    , 'County' )),
-							'12' => array( 'name' => __( '12'    , 'County' )),
-							'13' => array( 'name' => __( '13'     , 'County' )),
-							'14' => array( 'name' => __( '14'   , 'County' )),
-							'15' => array( 'name' => __( '15'    , 'County' )),
-							'16' => array( 'name' => __( '16'    , 'County' )),
-							'17' => array( 'name' => __( '17'    , 'County' )),
-							'18' => array( 'name' => __( '18'    , 'County' )),
-							'19' => array( 'name' => __( '19'    , 'County' )),
-							'20' => array( 'name' => __( '20'  , 'County' )),
-							'21' => array( 'name' => __( '21'  , 'County' )),
-							'22' => array( 'name' => __( '22'  , 'County' )),
-							'23' => array( 'name' => __( '23'    , 'County' )),
-							'24' => array( 'name' => __( '24'     , 'County' )),
-							'25' => array( 'name' => __( '25'    , 'County' )),
-							'26' => array( 'name' => __( '26'     , 'County' )),
-							'27' => array( 'name' => __( '27' , 'County' )),
-							'28' => array( 'name' => __( '28'  , 'County' )),
-							'29' => array( 'name' => __( '29' , 'County' )),
-							'30' => array( 'name' => __( '30'    , 'County' )),
-							'31' => array( 'name' => __( '31'    , 'County' )),
-							'32' => array( 'name' => __( '32'   , 'County' )),
-							'33' => array( 'name' => __( '33'    , 'County' )),
-							'34' => array( 'name' => __( '34'    , 'County' )),
-							'35' => array( 'name' => __( '35'    , 'County' )),
-							'36' => array( 'name' => __( '36'    , 'County' )),
-							'37' => array( 'name' => __( '37'    , 'County' )),
-							'38' => array( 'name' => __( '38'  , 'County' )),
-							'39' => array( 'name' => __( '39'    , 'County' )),
-							'40' => array( 'name' => __( '40'    , 'County' )),
-							'41' => array( 'name' => __( '41'    , 'County' )),
-							'42' => array( 'name' => __( '42'    , 'County' )),
-							'43' => array( 'name' => __( '43'     , 'County' )),
-							'44' => array( 'name' => __( '44'   , 'County' )),
-							'45' => array( 'name' => __( '45'    , 'County' )),
-							'46' => array( 'name' => __( '46'    , 'County' )),
-							'47' => array( 'name' => __( '47'    , 'County' )),
-							'48' => array( 'name' => __( '48'    , 'County' )),
-							'49' => array( 'name' => __( '49'    , 'County' )),
-							'50' => array( 'name' => __( '50'  , 'County' )),
-							'51' => array( 'name' => __( '51'  , 'County' )),
-							'52' => array( 'name' => __( '52'  , 'County' )),
-							'53' => array( 'name' => __( '53'    , 'County' )),
-							'54' => array( 'name' => __( '54'     , 'County' )),
-							'55' => array( 'name' => __( '55'    , 'County' )),
-							'56' => array( 'name' => __( '56'     , 'County' )),
-							'57' => array( 'name' => __( '57' , 'County' )),
-							'58' => array( 'name' => __( '58'  , 'County' )),
-							'59' => array( 'name' => __( '59' , 'County' ))
-						),
-					),
-					'countdown-timestamp-second' =>  array(
-						'type'    =>  'select',
-						'inputlabel'   =>  __('Select seconds', 'County'),
-						'selectvalues'     => array(
-							'0' => array( 'name' => __( '0'   , 'County' )),
-							'1' => array( 'name' => __( '1'   , 'County' )),
-							'2' => array( 'name' => __( '2'   , 'County' )),
-							'3' => array( 'name' => __( '3'    , 'County' )),
-							'4' => array( 'name' => __( '4'    , 'County' )),
-							'5' => array( 'name' => __( '5'    , 'County' )),
-							'6' => array( 'name' => __( '6'    , 'County' )),
-							'7' => array( 'name' => __( '7'    , 'County' )),
-							'8' => array( 'name' => __( '8'  , 'County' )),
-							'9' => array( 'name' => __( '9'    , 'County' )),
-							'10' => array( 'name' => __( '10'    , 'County' )),
-							'11' => array( 'name' => __( '11'    , 'County' )),
-							'12' => array( 'name' => __( '12'    , 'County' )),
-							'13' => array( 'name' => __( '13'     , 'County' )),
-							'14' => array( 'name' => __( '14'   , 'County' )),
-							'15' => array( 'name' => __( '15'    , 'County' )),
-							'16' => array( 'name' => __( '16'    , 'County' )),
-							'17' => array( 'name' => __( '17'    , 'County' )),
-							'18' => array( 'name' => __( '18'    , 'County' )),
-							'19' => array( 'name' => __( '19'    , 'County' )),
-							'20' => array( 'name' => __( '20'  , 'County' )),
-							'21' => array( 'name' => __( '21'  , 'County' )),
-							'22' => array( 'name' => __( '22'  , 'County' )),
-							'23' => array( 'name' => __( '23'    , 'County' )),
-							'24' => array( 'name' => __( '24'     , 'County' )),
-							'25' => array( 'name' => __( '25'    , 'County' )),
-							'26' => array( 'name' => __( '26'     , 'County' )),
-							'27' => array( 'name' => __( '27' , 'County' )),
-							'28' => array( 'name' => __( '28'  , 'County' )),
-							'29' => array( 'name' => __( '29' , 'County' )),
-							'30' => array( 'name' => __( '30'    , 'County' )),
-							'31' => array( 'name' => __( '31'    , 'County' )),
-							'32' => array( 'name' => __( '32'   , 'County' )),
-							'33' => array( 'name' => __( '33'    , 'County' )),
-							'34' => array( 'name' => __( '34'    , 'County' )),
-							'35' => array( 'name' => __( '35'    , 'County' )),
-							'36' => array( 'name' => __( '36'    , 'County' )),
-							'37' => array( 'name' => __( '37'    , 'County' )),
-							'38' => array( 'name' => __( '38'  , 'County' )),
-							'39' => array( 'name' => __( '39'    , 'County' )),
-							'40' => array( 'name' => __( '40'    , 'County' )),
-							'41' => array( 'name' => __( '41'    , 'County' )),
-							'42' => array( 'name' => __( '42'    , 'County' )),
-							'43' => array( 'name' => __( '43'     , 'County' )),
-							'44' => array( 'name' => __( '44'   , 'County' )),
-							'45' => array( 'name' => __( '45'    , 'County' )),
-							'46' => array( 'name' => __( '46'    , 'County' )),
-							'47' => array( 'name' => __( '47'    , 'County' )),
-							'48' => array( 'name' => __( '48'    , 'County' )),
-							'49' => array( 'name' => __( '49'    , 'County' )),
-							'50' => array( 'name' => __( '50'  , 'County' )),
-							'51' => array( 'name' => __( '51'  , 'County' )),
-							'52' => array( 'name' => __( '52'  , 'County' )),
-							'53' => array( 'name' => __( '53'    , 'County' )),
-							'54' => array( 'name' => __( '54'     , 'County' )),
-							'55' => array( 'name' => __( '55'    , 'County' )),
-							'56' => array( 'name' => __( '56'     , 'County' )),
-							'57' => array( 'name' => __( '57' , 'County' )),
-							'58' => array( 'name' => __( '58'  , 'County' )),
-							'59' => array( 'name' => __( '59' , 'County' ))
-						),
-					)
-				)
-			),
+		$options[] = array(
+			'key' => 'countdown_help',
+			'type'     => 'template',
+			'template'      => do_shortcode( $how_to_use ),
+			'title' =>__( 'How to use:', 'county' ) ,
 		);
 
-		$tab_settings = array(
-
-			'id'  => 'countdown_options',
-			'name'  => 'County',
-			'icon'  => $this->icon,
-			'clone_id' => $settings['clone_id'],
-			'active' => $settings['active']
+		$options[] = array(
+			'key'				=> 'countdown-description',
+			'title'     		=>  __('Text Settings', 'post-slider'),
+			'type'     			=> 'multi',
+			'opts'   			=> array(
+				array(
+					'key'	=>	'countdown-description-header',
+					'type'    =>  'text',
+					'label'  =>  __('Custom countdown header text', 'county'),
+					'help'   =>  __('For example: "The offer is ending in:" or "Site is launching in:"', 'county'),
+				),
+				array(
+					'key'	=>	'countdown-description-subhead',
+					'type'    =>  'text',
+					'label'  =>  __('Custom subheading text above the counter', 'county'),
+					'help'   =>  __('For example: "Hurry up and go to the store!" or "We are building something amazing"', 'county'),
+				),
+				array(
+					'key'	=>	'countdown-description-below',
+					'type'    =>  'text',
+					'label'  =>  __('Custom subheading text below the counter', 'county'),
+					'help'   =>  __('For example: "Click here to go to the store:" or "If you want to get in touch, please call us at +1 1234 123 123"', 'county'),
+				),
+				array(
+					'key'	=>	'countdown-description-shortcode',
+					'type'    =>  'text',
+					'label'  =>  __('Shortcode input', 'county'),
+					'help'   =>  __('For example: "An email capture form."', 'county'),
+				)
+			)
 		);
 
-		register_metatab($tab_settings, $options, $this->class_name);
+		$options[] = array(
+			'key'				=> 'countdown-terms',
+			'title'     		=>  __('Terms of time', 'post-slider'),
+			'type'     			=> 'multi',
+			'opts'   			=> array(
+				array(
+					'key'	=>	'countdown-terms-days',
+					'type'    =>  'text',
+					'label'  =>  __('Terms of "days"', 'county'),
+					'help'   =>  __('For example: In your language.', 'county'),
+				),
+				array(
+					'key'	=>	'countdown-terms-hours',
+					'type'    =>  'text',
+					'label'  =>  __('Terms of "hours"', 'county'),
+					'help'   =>  __('For example: In your language.', 'county'),
+				),
+				array(
+					'key'	=>		'countdown-terms-minutes',
+					'type'    =>  'text',
+					'label'  =>  __('Terms of "minutes"', 'county'),
+					'help'   =>  __('For example: In your language.', 'county'),
+				),
+				array(
+					'key'	=>	'countdown-terms-seconds',
+					'type'    =>  'text',
+					'label'  =>  __('Terms of "seconds"', 'county'),
+					'help'   =>  __('For example: In your language.', 'county'),
+				)
+			)
+		);
 
+		$options[] = array(
+			'key'				=> 'countdown-timestamp',
+			'title'     		=>  __('Time Stamp', 'post-slider'),
+			'type'     			=> 'multi',
+			'opts'   			=> array(
+				array(
+					'key'	=>	'countdown-timestamp-date',
+					'type'    =>  'select',
+					'label'   =>  __('Select date', 'county'),
+					'opts'     => array(
+						'1' => array( 'name' => __( '1st'   , 'county' )),
+						'2' => array( 'name' => __( '2nd'   , 'county' )),
+						'3' => array( 'name' => __( '3rd'    , 'county' )),
+						'4' => array( 'name' => __( '4th'    , 'county' )),
+						'5' => array( 'name' => __( '5th'    , 'county' )),
+						'6' => array( 'name' => __( '6th'    , 'county' )),
+						'7' => array( 'name' => __( '7th'    , 'county' )),
+						'8' => array( 'name' => __( '8th'  , 'county' )),
+						'9' => array( 'name' => __( '9th'    , 'county' )),
+						'10' => array( 'name' => __( '10th'    , 'county' )),
+						'11' => array( 'name' => __( '11th'    , 'county' )),
+						'12' => array( 'name' => __( '12th'    , 'county' )),
+						'13' => array( 'name' => __( '13th'     , 'county' )),
+						'14' => array( 'name' => __( '14th'   , 'county' )),
+						'15' => array( 'name' => __( '15th'    , 'county' )),
+						'16' => array( 'name' => __( '16th'    , 'county' )),
+						'17' => array( 'name' => __( '17th'    , 'county' )),
+						'18' => array( 'name' => __( '18th'    , 'county' )),
+						'19' => array( 'name' => __( '19th'    , 'county' )),
+						'20' => array( 'name' => __( '20th'  , 'county' )),
+						'21' => array( 'name' => __( '21st'  , 'county' )),
+						'22' => array( 'name' => __( '22nd'  , 'county' )),
+						'23' => array( 'name' => __( '23rd'    , 'county' )),
+						'24' => array( 'name' => __( '24th'     , 'county' )),
+						'25' => array( 'name' => __( '25th'    , 'county' )),
+						'26' => array( 'name' => __( '26th'     , 'county' )),
+						'27' => array( 'name' => __( '27th' , 'county' )),
+						'28' => array( 'name' => __( '28th'  , 'county' )),
+						'29' => array( 'name' => __( '29th' , 'county' )),
+						'30' => array( 'name' => __( '30th'    , 'county' )),
+						'31' => array( 'name' => __( '31st'    , 'county' ))
+					),
+				),
+				array(
+					'key'	=>	'countdown-timestamp-month',
+					'type'    =>  'select',
+					'label'   =>  __('Select month', 'county'),
+					'opts'     => array(
+						'0' => array( 'name' => __( 'January'   , 'county' )),
+						'1' => array( 'name' => __( 'February'   , 'county' )),
+						'2' => array( 'name' => __( 'March'   , 'county' )),
+						'3' => array( 'name' => __( 'April'    , 'county' )),
+						'4' => array( 'name' => __( 'May'    , 'county' )),
+						'5' => array( 'name' => __( 'June'    , 'county' )),
+						'6' => array( 'name' => __( 'July'    , 'county' )),
+						'7' => array( 'name' => __( 'August'    , 'county' )),
+						'8' => array( 'name' => __( 'September'  , 'county' )),
+						'9' => array( 'name' => __( 'October'    , 'county' )),
+						'10' => array( 'name' => __( 'November'    , 'county' )),
+						'11' => array( 'name' => __( 'December'    , 'county' ))
+					),
+				),
+				array(
+					'key'	=>	'countdown-timestamp-year',
+					'type'    =>  'select',
+					'label'   =>  __('Select year', 'county'),
+					'opts'     => array(
+						'2013' => array( 'name' => __( '2013'   , 'county' )),
+						'2014' => array( 'name' => __( '2014'   , 'county' )),
+						'2015' => array( 'name' => __( '2015'    , 'county' )),
+						'2016' => array( 'name' => __( '2016'    , 'county' )),
+						'2017' => array( 'name' => __( '2017'    , 'county' )),
+						'2018' => array( 'name' => __( '2018'    , 'county' )),
+						'2019' => array( 'name' => __( '2019'    , 'county' )),
+						'2020' => array( 'name' => __( '2020'  , 'county' )),
+						'2021' => array( 'name' => __( '2021'    , 'county' )),
+						'2022' => array( 'name' => __( '2022'    , 'county' )),
+						'2023' => array( 'name' => __( '2023'    , 'county' ))
+					),
+				),
+				array(
+					'key'	=>		'countdown-timestamp-hour',
+					'type'    =>  'select',
+					'label'   =>  __('Select hour', 'county'),
+					'opts'     => array(
+						'0' => array( 'name' => __( '0'   , 'county' )),
+						'1' => array( 'name' => __( '1'   , 'county' )),
+						'2' => array( 'name' => __( '2'   , 'county' )),
+						'3' => array( 'name' => __( '3'    , 'county' )),
+						'4' => array( 'name' => __( '4'    , 'county' )),
+						'5' => array( 'name' => __( '5'    , 'county' )),
+						'6' => array( 'name' => __( '6'    , 'county' )),
+						'7' => array( 'name' => __( '7'    , 'county' )),
+						'8' => array( 'name' => __( '8'  , 'county' )),
+						'9' => array( 'name' => __( '9'    , 'county' )),
+						'10' => array( 'name' => __( '10'    , 'county' )),
+						'11' => array( 'name' => __( '11'    , 'county' )),
+						'12' => array( 'name' => __( '12'    , 'county' )),
+						'13' => array( 'name' => __( '13'     , 'county' )),
+						'14' => array( 'name' => __( '14'   , 'county' )),
+						'15' => array( 'name' => __( '15'    , 'county' )),
+						'16' => array( 'name' => __( '16'    , 'county' )),
+						'17' => array( 'name' => __( '17'    , 'county' )),
+						'18' => array( 'name' => __( '18'    , 'county' )),
+						'19' => array( 'name' => __( '19'    , 'county' )),
+						'20' => array( 'name' => __( '20'  , 'county' )),
+						'21' => array( 'name' => __( '21'  , 'county' )),
+						'22' => array( 'name' => __( '22'  , 'county' )),
+						'23' => array( 'name' => __( '23'    , 'county' ))
+					),
+				),
+				array(
+					'key'	=>		'countdown-timestamp-minute',
+					'type'    =>  'select',
+					'label'   =>  __('Select minute', 'county'),
+					'opts'     => array(
+						'0' => array( 'name' => __( '0'   , 'county' )),
+						'1' => array( 'name' => __( '1'   , 'county' )),
+						'2' => array( 'name' => __( '2'   , 'county' )),
+						'3' => array( 'name' => __( '3'    , 'county' )),
+						'4' => array( 'name' => __( '4'    , 'county' )),
+						'5' => array( 'name' => __( '5'    , 'county' )),
+						'6' => array( 'name' => __( '6'    , 'county' )),
+						'7' => array( 'name' => __( '7'    , 'county' )),
+						'8' => array( 'name' => __( '8'  , 'county' )),
+						'9' => array( 'name' => __( '9'    , 'county' )),
+						'10' => array( 'name' => __( '10'    , 'county' )),
+						'11' => array( 'name' => __( '11'    , 'county' )),
+						'12' => array( 'name' => __( '12'    , 'county' )),
+						'13' => array( 'name' => __( '13'     , 'county' )),
+						'14' => array( 'name' => __( '14'   , 'county' )),
+						'15' => array( 'name' => __( '15'    , 'county' )),
+						'16' => array( 'name' => __( '16'    , 'county' )),
+						'17' => array( 'name' => __( '17'    , 'county' )),
+						'18' => array( 'name' => __( '18'    , 'county' )),
+						'19' => array( 'name' => __( '19'    , 'county' )),
+						'20' => array( 'name' => __( '20'  , 'county' )),
+						'21' => array( 'name' => __( '21'  , 'county' )),
+						'22' => array( 'name' => __( '22'  , 'county' )),
+						'23' => array( 'name' => __( '23'    , 'county' )),
+						'24' => array( 'name' => __( '24'     , 'county' )),
+						'25' => array( 'name' => __( '25'    , 'county' )),
+						'26' => array( 'name' => __( '26'     , 'county' )),
+						'27' => array( 'name' => __( '27' , 'county' )),
+						'28' => array( 'name' => __( '28'  , 'county' )),
+						'29' => array( 'name' => __( '29' , 'county' )),
+						'30' => array( 'name' => __( '30'    , 'county' )),
+						'31' => array( 'name' => __( '31'    , 'county' )),
+						'32' => array( 'name' => __( '32'   , 'county' )),
+						'33' => array( 'name' => __( '33'    , 'county' )),
+						'34' => array( 'name' => __( '34'    , 'county' )),
+						'35' => array( 'name' => __( '35'    , 'county' )),
+						'36' => array( 'name' => __( '36'    , 'county' )),
+						'37' => array( 'name' => __( '37'    , 'county' )),
+						'38' => array( 'name' => __( '38'  , 'county' )),
+						'39' => array( 'name' => __( '39'    , 'county' )),
+						'40' => array( 'name' => __( '40'    , 'county' )),
+						'41' => array( 'name' => __( '41'    , 'county' )),
+						'42' => array( 'name' => __( '42'    , 'county' )),
+						'43' => array( 'name' => __( '43'     , 'county' )),
+						'44' => array( 'name' => __( '44'   , 'county' )),
+						'45' => array( 'name' => __( '45'    , 'county' )),
+						'46' => array( 'name' => __( '46'    , 'county' )),
+						'47' => array( 'name' => __( '47'    , 'county' )),
+						'48' => array( 'name' => __( '48'    , 'county' )),
+						'49' => array( 'name' => __( '49'    , 'county' )),
+						'50' => array( 'name' => __( '50'  , 'county' )),
+						'51' => array( 'name' => __( '51'  , 'county' )),
+						'52' => array( 'name' => __( '52'  , 'county' )),
+						'53' => array( 'name' => __( '53'    , 'county' )),
+						'54' => array( 'name' => __( '54'     , 'county' )),
+						'55' => array( 'name' => __( '55'    , 'county' )),
+						'56' => array( 'name' => __( '56'     , 'county' )),
+						'57' => array( 'name' => __( '57' , 'county' )),
+						'58' => array( 'name' => __( '58'  , 'county' )),
+						'59' => array( 'name' => __( '59' , 'county' ))
+					),
+				),
+				array(
+					'key'	=>		'countdown-timestamp-second',
+					'type'    =>  'select',
+					'label'   =>  __('Select seconds', 'county'),
+					'opts'     => array(
+						'0' => array( 'name' => __( '0'   , 'county' )),
+						'1' => array( 'name' => __( '1'   , 'county' )),
+						'2' => array( 'name' => __( '2'   , 'county' )),
+						'3' => array( 'name' => __( '3'    , 'county' )),
+						'4' => array( 'name' => __( '4'    , 'county' )),
+						'5' => array( 'name' => __( '5'    , 'county' )),
+						'6' => array( 'name' => __( '6'    , 'county' )),
+						'7' => array( 'name' => __( '7'    , 'county' )),
+						'8' => array( 'name' => __( '8'  , 'county' )),
+						'9' => array( 'name' => __( '9'    , 'county' )),
+						'10' => array( 'name' => __( '10'    , 'county' )),
+						'11' => array( 'name' => __( '11'    , 'county' )),
+						'12' => array( 'name' => __( '12'    , 'county' )),
+						'13' => array( 'name' => __( '13'     , 'county' )),
+						'14' => array( 'name' => __( '14'   , 'county' )),
+						'15' => array( 'name' => __( '15'    , 'county' )),
+						'16' => array( 'name' => __( '16'    , 'county' )),
+						'17' => array( 'name' => __( '17'    , 'county' )),
+						'18' => array( 'name' => __( '18'    , 'county' )),
+						'19' => array( 'name' => __( '19'    , 'county' )),
+						'20' => array( 'name' => __( '20'  , 'county' )),
+						'21' => array( 'name' => __( '21'  , 'county' )),
+						'22' => array( 'name' => __( '22'  , 'county' )),
+						'23' => array( 'name' => __( '23'    , 'county' )),
+						'24' => array( 'name' => __( '24'     , 'county' )),
+						'25' => array( 'name' => __( '25'    , 'county' )),
+						'26' => array( 'name' => __( '26'     , 'county' )),
+						'27' => array( 'name' => __( '27' , 'county' )),
+						'28' => array( 'name' => __( '28'  , 'county' )),
+						'29' => array( 'name' => __( '29' , 'county' )),
+						'30' => array( 'name' => __( '30'    , 'county' )),
+						'31' => array( 'name' => __( '31'    , 'county' )),
+						'32' => array( 'name' => __( '32'   , 'county' )),
+						'33' => array( 'name' => __( '33'    , 'county' )),
+						'34' => array( 'name' => __( '34'    , 'county' )),
+						'35' => array( 'name' => __( '35'    , 'county' )),
+						'36' => array( 'name' => __( '36'    , 'county' )),
+						'37' => array( 'name' => __( '37'    , 'county' )),
+						'38' => array( 'name' => __( '38'  , 'county' )),
+						'39' => array( 'name' => __( '39'    , 'county' )),
+						'40' => array( 'name' => __( '40'    , 'county' )),
+						'41' => array( 'name' => __( '41'    , 'county' )),
+						'42' => array( 'name' => __( '42'    , 'county' )),
+						'43' => array( 'name' => __( '43'     , 'county' )),
+						'44' => array( 'name' => __( '44'   , 'county' )),
+						'45' => array( 'name' => __( '45'    , 'county' )),
+						'46' => array( 'name' => __( '46'    , 'county' )),
+						'47' => array( 'name' => __( '47'    , 'county' )),
+						'48' => array( 'name' => __( '48'    , 'county' )),
+						'49' => array( 'name' => __( '49'    , 'county' )),
+						'50' => array( 'name' => __( '50'  , 'county' )),
+						'51' => array( 'name' => __( '51'  , 'county' )),
+						'52' => array( 'name' => __( '52'  , 'county' )),
+						'53' => array( 'name' => __( '53'    , 'county' )),
+						'54' => array( 'name' => __( '54'     , 'county' )),
+						'55' => array( 'name' => __( '55'    , 'county' )),
+						'56' => array( 'name' => __( '56'     , 'county' )),
+						'57' => array( 'name' => __( '57' , 'county' )),
+						'58' => array( 'name' => __( '58'  , 'county' )),
+						'59' => array( 'name' => __( '59' , 'county' ))
+					),
+				)
+			)
+		);
+		
+		return $options;
 	}
 
 }
